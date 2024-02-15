@@ -48,7 +48,7 @@ Conditions of Satisfaction:
 
 The report includes the correct and relevant information for the top N populated countries in the specified continent.
 The report is presented in a clear and readable format.
-The system handles invalid inputs gracefully, providing meaningful error messages to the user.
+The system handles invalid inputs , providing  error messages to the user.
 
 Use Case 2: Generate Population Report for a Continent
 Goal in Context:
@@ -87,7 +87,7 @@ The user navigates to the reporting section and selects the option to generate a
 The system prompts the user to enter the continent for which the report should be generated.
 The user enters a valid continent name.
 The system retrieves data from the SQL database, calculating the total population, population in cities, and population not living in cities for the specified continent.
-The system generates and displays a comprehensive population report for the specified continent.
+The system generates and displays a  population report for the specified continent.
 Extensions:
 
 Invalid Continent: If the user enters an invalid or non-existent continent, the system informs the user and prompts for a valid continent.
