@@ -1,0 +1,29 @@
+version: '3'
+services:
+  app:
+    build: .
+    depends_on:
+      - db
+    # Add other configurations like ports, environment variables as needed for your app
+    ports:
+      - "8000:8000" # Example port mapping, adjust according to your app's requirements
+    environment:
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB_PASSWORD=password
+
+  db:
+    build: ./target/db
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: world
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql # Persistent storage for MySQL data
+
+volumes:
+  mysql-data: # Defines a volume for persisting database
