@@ -7,7 +7,7 @@ public class ReportGenerator {
     private static final String JDBC_URL = "jdbc:mysql://localhost:3307/world?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "password";
-    private static Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
         System.out.println("Welcome to the World Population Report Generator!");
@@ -15,9 +15,9 @@ public class ReportGenerator {
 
         int reportType = scanner.nextInt();
         scanner.nextLine(); // Consume newline left-over
-        AreaSelection areaSelection = null; // Declare areaSelection
+        AreaSelection areaSelection; // Declare areaSelection
 
-        int n=0;
+        int n;
         switch (reportType) {
 
             case 1:
@@ -119,7 +119,7 @@ public class ReportGenerator {
         // Validate user choice and return an AreaSelection
         if (choice >= 1 && choice <= loop) {
             String selectedAreaType = areaArr[choice - 1]; // Adjusting for 0-index
-            String selectedAreaName = "";
+            String selectedAreaName;
 
             // Prompt for additional input if necessary
             if (!"World".equals(selectedAreaType)) {
@@ -237,19 +237,19 @@ public class ReportGenerator {
 
     public static void generateLanguageReport() {
         String query = """
-    SELECT 
+    SELECT
         Language,
         SUM(country.Population * (countrylanguage.Percentage / 100)) AS Number_of_Speakers,
         (SUM(country.Population * (countrylanguage.Percentage / 100)) / (SELECT SUM(Population) FROM country) * 100) AS Percentage_of_World_Population
-    FROM 
+    FROM
         country
-    JOIN 
+    JOIN
         countrylanguage ON country.Code = countrylanguage.CountryCode
-    WHERE 
+    WHERE
         Language IN ('Chinese', 'English', 'Hindi', 'Spanish', 'Arabic')
-    GROUP BY 
+    GROUP BY
         Language
-    ORDER BY 
+    ORDER BY
         Number_of_Speakers DESC;
     """;
 
