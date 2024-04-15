@@ -236,22 +236,24 @@ public class ReportGenerator {
     }
 
     public static void generateLanguageReport() {
-        String query = """
-    SELECT
-        Language,
-        SUM(country.Population * (countrylanguage.Percentage / 100)) AS Number_of_Speakers,
-        (SUM(country.Population * (countrylanguage.Percentage / 100)) / (SELECT SUM(Population) FROM country) * 100) AS Percentage_of_World_Population
-    FROM
-        country
-    JOIN
-        countrylanguage ON country.Code = countrylanguage.CountryCode
-    WHERE
-        Language IN ('Chinese', 'English', 'Hindi', 'Spanish', 'Arabic')
-    GROUP BY
-        Language
-    ORDER BY
-        Number_of_Speakers DESC;
-    """;
+        String query = "";
+                /*
+        SELECT
+            Language,
+            SUM(country.Population * (countrylanguage.Percentage / 100)) AS Number_of_Speakers,
+            (SUM(country.Population * (countrylanguage.Percentage / 100)) / (SELECT SUM(Population) FROM country) * 100) AS Percentage_of_World_Population
+        FROM
+            country
+        JOIN
+            countrylanguage ON country.Code = countrylanguage.CountryCode
+        WHERE
+            Language IN ('Chinese', 'English', 'Hindi', 'Spanish', 'Arabic')
+        GROUP BY
+            Language
+        ORDER BY
+            Number_of_Speakers DESC;
+        """;
+        */
 
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3307/world?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC", "root", "password");
              PreparedStatement statement = connection.prepareStatement(query);
